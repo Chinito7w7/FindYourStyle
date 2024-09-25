@@ -1,0 +1,129 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('../img/backgroundForLocaladd.jpg') center center/cover no-repeat fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 120vh;
+    
+}
+
+header {
+    background: #af6e19;
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+    cursor: pointer;
+}
+
+.page-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: white;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.add-local-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+.add-local-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.add-local-container h2 {
+    margin-bottom: 20px;
+    color: #af6e19;
+    text-align: center;
+}
+
+.add-local-container label {
+    margin-top: 10px;
+    color: #af6e19;
+}
+
+.add-local-container input {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #af6e19;
+    border-radius: 5px;
+}
+
+.add-local-container button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #af6e19;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-local-container button:hover {
+    background-color: #8e570f;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
