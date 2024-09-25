@@ -1,15 +1,17 @@
-/* General reset and styling */
+/* personalizar.css */
+
+/* Estilos Generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f3f4f6; /* Color de fondo gris claro */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
+    background-color: #af6e19; /* Color de fondo actualizado */
+    color: white;
+    padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,8 +23,8 @@ header {
 }
 
 .logo {
+    height: 50px;
     width: 50px;
-    height: auto;
     margin-right: 10px;
 }
 
@@ -31,83 +33,107 @@ header {
     font-weight: bold;
 }
 
-header a {
-    color: #fff;
+nav {
+    display: flex;
+    gap: 16px;
+}
+
+nav a {
+    color: white;
     text-decoration: none;
-    padding: 10px;
+    padding: 8px;
     border-radius: 4px;
     transition: background-color 0.3s;
 }
 
-header a:hover {
-    background-color: #555;
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 main {
     padding: 20px;
+    background-color: white; /* Fondo blanco para el contenido */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .customize-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 0 auto;
+    margin-top: 20px;
 }
 
-.customize-container h1 {
-    margin-top: 0;
-    color: #333;
+h1, h2 {
+    color: #af6e19; /* Color de los títulos actualizado */
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 20px;
 }
 
 form label {
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
 }
 
-form input, form textarea {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ddd;
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-form button {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
+button {
+    padding: 10px 15px;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s;
 }
 
-form button:hover {
-    background-color: #0056b3;
+/* Botón para actualizar local (azul) */
+button[name="update"] {
+    background-color: #007BFF; /* Azul */
+    color: white;
+}
+
+button[name="update"]:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* Botón para agregar servicio (verde) */
+button[name="add_service"] {
+    background-color: #28A745; /* Verde */
+    color: white;
+}
+
+button[name="add_service"]:hover {
+    background-color: #218838; /* Verde más oscuro */
+}
+
+/* Botón para eliminar local (rojo) */
+button[name="delete_local"] {
+    background-color: #DC3545; /* Rojo */
+    color: white;
+}
+
+button[name="delete_local"]:hover {
+    background-color: #c82333; /* Rojo más oscuro */
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #f3f4f6; /* Color de fondo gris claro */
     text-align: center;
-    padding: 10px 0;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
+    padding: 10px;
+    margin-top: 20px;
 }
 
 .footer-links a {
-    color: #fff;
-    text-decoration: none;
     margin: 0 10px;
+    color: #333;
+    text-decoration: none;
 }
 
 .footer-links a:hover {

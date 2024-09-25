@@ -45,8 +45,10 @@ if (isset($_POST['suspend'])) {
         $stmt_update_owner = $conn->prepare($query_update_owner);
         $stmt_update_owner->bindParam(':owner_id', $owner_id);
         $stmt_update_owner->execute();
-    } else {
-        echo "No se encontró el local.";
+        echo("local eliminado con exito");
+        header('Location: admin_locales.php');
+        
+        exit;
     }
 }
 ?>

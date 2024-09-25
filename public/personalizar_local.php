@@ -26,36 +26,74 @@ if (isset($_GET['id'])) {
         exit();
     }
 
-    // Manejar el formulario de servicios
+    // Manejar la actualización del local
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $name = $_POST['name'];
-        $description = $_POST['description'];
-        $price = $_POST['price'];
+        if (isset($_POST['update'])) {
+            $name = $_POST['local_name'];
+            $image = $_FILES['local_image']['name'];
 
-        $query_add_service = "INSERT INTO services (local_id, name, description, price) VALUES (:local_id, :name, :description, :price)";
-        $stmt_add_service = $conn->prepare($query_add_service);
-        $stmt_add_service->bindParam(':local_id', $local_id);
-        $stmt_add_service->bindParam(':name', $name);
-        $stmt_add_service->bindParam(':description', $description);
-        $stmt_add_service->bindParam(':price', $price);
-        $stmt_add_service->execute();
+            // Si hay una nueva imagen, moverla a la carpeta correspondiente
+            if ($image) {
+                move_uploaded_file($_FILES['local_image']['tmp_name'], "../uploads/locals/" . $image);
+            } else {
+                $image = null; // Mantener la imagen existente si no se sube una nueva
+            }
 
-        header("Location: local.php?id=" . $local_id);
-        exit();
+            $query_update_local = "UPDATE locals SET name = :name, main_photo = COALESCE(:image, main_photo) WHERE id = :local_id";
+            $stmt_update_local = $conn->prepare($query_update_local);
+            $stmt_update_local->bindParam(':local_id', $local_id);
+            $stmt_update_local->bindParam(':name', $name);
+            $stmt_update_local->bindParam(':image', $image);
+            $stmt_update_local->execute();
+
+            header("Location: local.php?id=" . $local_id);
+            exit();
+        }
+
+        // Manejar el formulario de servicios
+        if (isset($_POST['add_service'])) {
+            $service_name = $_POST['name'];
+            $price = $_POST['price'];
+
+            $query_add_service = "INSERT INTO services (local_id, name, price) VALUES (:local_id, :name, :price)";
+            $stmt_add_service = $conn->prepare($query_add_service);
+            $stmt_add_service->bindParam(':local_id', $local_id);
+            $stmt_add_service->bindParam(':name', $service_name);
+            $stmt_add_service->bindParam(':price', $price);
+            $stmt_add_service->execute();
+
+            header("Location: local.php?id=" . $local_id);
+            exit();
+        }
+
+        // Manejar la eliminación del local
+        if (isset($_POST['delete_local'])) {
+            // Primero, actualizar el campo is_local_owner a 0
+            $query_update_owner_status = "UPDATE users SET is_local_owner = 0 WHERE id = :user_id";
+            $stmt_update_owner_status = $conn->prepare($query_update_owner_status);
+            $stmt_update_owner_status->bindParam(':user_id', $user_id);
+            $stmt_update_owner_status->execute();
+        
+            // Luego, eliminar el local
+            $query_delete_local = "DELETE FROM locals WHERE id = :local_id";
+            $stmt_delete_local = $conn->prepare($query_delete_local);
+            $stmt_delete_local->bindParam(':local_id', $local_id);
+            $stmt_delete_local->execute();
+        
+            header("Location: index.php");
+            exit();
+        }
     }
-} else {
-    echo "ID del local no especificado.";
-    exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalizar Local - Find Your Style</title>
+    <title>Configurar Local - Find Your Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/personalizar.css">
 </head>
 <body>
@@ -64,21 +102,41 @@ if (isset($_GET['id'])) {
             <img src="../assets/img/logo.png" alt="Logo" class="logo">
             <span class="page-name">Find Your Style</span>
         </div>
-        <a href="local.php?id=<?php echo htmlspecialchars($local_id); ?>" class="back-local-btn">Volver al local</a>
-        <a href="index.php" class="back-home-btn">Volver a la página principal</a>
+        <nav>
+            <a href="local.php?id=<?php echo htmlspecialchars($local_id); ?>" class="back-local-btn">Volver al local</a>
+            <a href="index.php" class="back-home-btn">Volver a la página principal</a>
+        </nav>
     </header>
 
     <main>
         <div class="customize-container">
-            <h1>Agregar Servicios</h1>
+            <h1>Personalizar Local</h1>
+
+            <h2>Cambiar Nombre e Imagen del Local</h2>
+            <form action="personalizar_local.php?id=<?php echo htmlspecialchars($local_id); ?>" method="POST" enctype="multipart/form-data">
+                <label for="local_name">Nombre del Local:</label>
+                <input type="text" id="local_name" name="local_name" required>
+                
+                <label for="local_image">Imagen del Local:</label>
+                <input type="file" id="local_image" name="local_image">
+                
+                <button type="submit" name="update">Actualizar Local</button>
+            </form>
+
+            <h2>Agregar Servicios</h2>
             <form action="personalizar_local.php?id=<?php echo htmlspecialchars($local_id); ?>" method="POST">
                 <label for="name">Nombre del Servicio:</label>
                 <input type="text" id="name" name="name" required>
-                <label for="description">Descripción:</label>
-                <textarea id="description" name="description" rows="4" required></textarea>
+                
                 <label for="price">Precio:</label>
                 <input type="number" id="price" name="price" step="0.01" required>
-                <button type="submit">Agregar Servicio</button>
+                
+                <button type="submit" name="add_service">Agregar Servicio</button>
+            </form>
+
+            <h2>Eliminar Local</h2>
+            <form action="personalizar_local.php?id=<?php echo htmlspecialchars($local_id); ?>" method="POST">
+                <button type="submit" name="delete_local" onclick="return confirm('¿Estás seguro de que deseas eliminar este local? Esta acción no se puede deshacer.');">Eliminar Local</button>
             </form>
         </div>
     </main>
@@ -92,4 +150,3 @@ if (isset($_GET['id'])) {
     </footer>
 </body>
 </html>
-

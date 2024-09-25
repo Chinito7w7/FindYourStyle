@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$is_owner) {
 
         <!-- Mostrar botón 'Personalizar Local' solo si el usuario es el dueño -->
         <?php if ($is_owner): ?>
-            <a href="personalizar_local.php?id=<?php echo htmlspecialchars($local_id); ?>" class="customize-local-btn">Personalizar Local</a>
+            <a href="personalizar_local.php?id=<?php echo htmlspecialchars($local_id); ?>" class="customize-local-btn">Configuracion de Local</a>
         <?php endif; ?>
         
         <a href="index.php" class="back-home-btn">Volver a la página principal</a>
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$is_owner) {
                         <?php foreach ($services as $service): ?>
                             <li>
                                 <strong><?php echo htmlspecialchars($service['name']); ?></strong>: 
-                                <?php echo htmlspecialchars($service['description']); ?> - 
+                                
                                 Precio: $<?php echo htmlspecialchars(number_format($service['price'], 2)); ?>
                             </li>
                         <?php endforeach; ?>

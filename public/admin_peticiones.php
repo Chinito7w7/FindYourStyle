@@ -49,11 +49,10 @@ if (isset($_POST['approve'])) {
         $stmt_update_user = $conn->prepare($query_update_user);
         $stmt_update_user->bindParam(':owner_id', $request['owner_id']);
         $stmt_update_user->execute();
-
-        echo "Solicitud aprobada y local añadido.";
-    } else {
-        echo "Solicitud no encontrada.";
-    }
+        header('Location: admin_peticiones.php');
+        echo("local aprobado con exito");
+        exit();
+    } 
 }
 
 // Rechazar una solicitud

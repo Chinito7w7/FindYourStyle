@@ -61,7 +61,11 @@ $user = $stmt_user->fetch();
         <a href="logout.php" class="logout-button">Cerrar sesión</a>
     </div>
     </nav>
-
+    <div class="search-bar-container">
+        <form id="searchForm" onsubmit="return false;">
+            <input type="text" id="searchInput" placeholder="Buscar locales..." />
+        </form>
+    </div>
     <!-- Contenido de la página principal -->
     <div class="content">
         <h1>Locales Disponibles</h1>
@@ -81,5 +85,8 @@ $user = $stmt_user->fetch();
     </div>
 
     </div>
+    
+    <script src="../js/search.js"></script>
+    <script src="../js/dropMenu.js"></script>
 </body>
 </html>

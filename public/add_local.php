@@ -44,9 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     
     // Mostrar mensaje de éxito
-    echo "Tu solicitud para agregar un local ha sido enviada y está pendiente de aprobación.";
-    echo "<a href='index.php'>Volver a la página principal</a>";
-    exit();
+    header('Location: index.php');
+    exit;
 }
 
 ?>
@@ -89,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="main_photo">Foto Principal:</label>
                 <input type="file" id="main_photo" name="main_photo" accept="image/*" required>
 
-                <button type="submit">Enviar Solicitud</button>
+                <button onclick="alertaSolicitud()" type="submit">Enviar Solicitud</button>
             </form>
         </div>
     </main>

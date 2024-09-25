@@ -1,26 +1,141 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family:'poppins';
+    font-family: 'Poppins', sans-serif;
 }
+
+body {
+    background-color: #f5f5f5;
+}
+
+/* Navbar styles */
 .navbar {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     background-color: #af6e19;
+    color: white;
     padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
-.navbar .logo {
+.logo-container {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.logo-container img {
+    height: 60px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.logo-container h3 {
     font-size: 24px;
     font-weight: bold;
+    margin: 0;
 }
 
+.navbar-right {
+    display: flex;
+    gap: 10px;
+}
 
-/* Estilos para el grid de locales */
+.view-local-button,
+.add-local-btn,
+.btn-notifications,
+.logout-button {
+    background-color: #af6e19;
+    color: white;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+}
+
+.view-local-button:hover,
+.add-local-btn:hover,
+.btn-notifications:hover,
+.logout-button:hover {
+    background-color: #8e570f;
+}
+
+/* Search bar styles */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #e0e0e0;
+    margin-top: 80px; /* To account for the fixed navbar */
+}
+
+#searchForm {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Increased max-width for a longer search bar */
+}
+
+#searchInput {
+    padding: 12px 20px; /* Increased padding for a taller search bar */
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Increased border-radius for more rounded corners */
+    outline: none;
+}
+
+#searchForm button {
+    padding: 12px 20px; /* Matched padding with the input */
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 25px; /* Matched border-radius with the input */
+    cursor: pointer;
+}
+
+#searchForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Content styles */
+.content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Styles for "Available Premises" and description */
+.content h1 {
+    font-size: 28px;
+    color: #af6e19;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.content > p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Local grid styles */
 .local-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); 
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     padding: 20px;
 }
@@ -31,6 +146,12 @@
     padding: 15px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: transform 0.3s;
+}
+
+.local-card:hover {
+    transform: translateY(-5px);
 }
 
 .local-card img {
@@ -48,27 +169,50 @@
 .local-card p {
     margin: 5px 0;
     font-size: 14px;
-}
-.logo-container {
-    color: white;
-    display: flex;
-    align-items: center;
+    color: #666;
 }
 
-.logo-container img {
-    height: 60px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.view-local-button, .add-local-btn, .logout-button, .btn-notifications, .add-local-btn {
-    background-color: #af6e19;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-left: 10px;
+.local-card .view-local-button {
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+    width: fit-content;
 }
 
-.view-local-button:hover, .add-local-btn:hover, .logout-button:hover ,.btn-notifications:hover ,.add-local-btn:hover{
-    background-color: #8e570f;
+/* Responsive design */
+@media (max-width: 1200px) {
+    .local-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .local-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .local-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .navbar-right {
+        margin-top: 10px;
+    }
+    
+    #searchInput {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .local-grid {
+        grid-template-columns: 1fr;
+    }
 }

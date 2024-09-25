@@ -16,10 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':location', $location);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $password);
+
+    // Ejecutar la consulta
+    if ($stmt->execute()) {
+        // Redirigir a la página de inicio de sesión o mostrar un mensaje de éxito
+        header("Location: login.php?register=success");
+        exit();
+    } else {
+        // Manejo de errores
+        $error = "Error al registrarse. Inténtalo de nuevo.";
+        echo "<script>alert('$error');</script>";
+    }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="es">
