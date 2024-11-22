@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2024 a las 21:13:25
+-- Tiempo de generación: 10-10-2024 a las 19:45:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,7 +42,11 @@ CREATE TABLE `locals` (
 --
 
 INSERT INTO `locals` (`id`, `name`, `location`, `owner_id`, `main_photo`, `opening_time`, `closing_time`) VALUES
-(25, 'BarberCosmica', 'Ituzaingo', 16, 'boca-750x563.png', '07:30:00', '22:00:00');
+(72, 'Estetica Rodri', 'Merlo', 20, '527515f0a30d2cd6994f30f603ea01b9.jpg', '10:00:00', '18:00:00'),
+(73, 'BarbeRom', 'La plata', 21, '4544148.jpeg', '15:30:00', '21:00:00'),
+(74, 'FedeStylos', 'Rodriguez', 22, 'dreux-france-07-23-2023-260nw-2343682425ñ.png', '15:30:00', '22:30:00'),
+(75, 'Esteticas Vir', 'Ituzaingo', 23, '8b469ef03c1de86dc3dc7391c3bb47d7.jpg', '09:00:00', '18:00:00'),
+(76, 'EsteBarber', 'Moron', 24, 'front-view-barber-shop-modern-600nw-723232468.png', '10:00:00', '18:00:00');
 
 -- --------------------------------------------------------
 
@@ -55,6 +59,35 @@ CREATE TABLE `local_images` (
   `local_id` bigint(20) NOT NULL,
   `image_url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `local_requests`
+--
+
+CREATE TABLE `local_requests` (
+  `id` bigint(20) NOT NULL,
+  `owner_id` bigint(20) NOT NULL,
+  `name` text NOT NULL,
+  `location` text NOT NULL,
+  `schedule` text NOT NULL,
+  `status` enum('pending','approved','rejected') DEFAULT 'pending',
+  `main_photo` varchar(255) DEFAULT NULL,
+  `opening_time` time NOT NULL,
+  `closing_time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `local_requests`
+--
+
+INSERT INTO `local_requests` (`id`, `owner_id`, `name`, `location`, `schedule`, `status`, `main_photo`, `opening_time`, `closing_time`) VALUES
+(46, 20, 'Estetica Rodri', 'Merlo', '', 'approved', '527515f0a30d2cd6994f30f603ea01b9.jpg', '10:00:00', '18:00:00'),
+(47, 21, 'BarbeRom', 'La plata', '', 'approved', '4544148.jpeg', '15:30:00', '21:00:00'),
+(48, 22, 'FedeStylos', 'Rodriguez', '', 'approved', 'dreux-france-07-23-2023-260nw-2343682425ñ.png', '15:30:00', '22:30:00'),
+(49, 23, 'Esteticas Vir', 'Ituzaingo', '', 'approved', '8b469ef03c1de86dc3dc7391c3bb47d7.jpg', '09:00:00', '18:00:00'),
+(50, 24, 'EsteBarber', 'Moron', '', 'approved', 'front-view-barber-shop-modern-600nw-723232468.png', '10:00:00', '18:00:00');
 
 -- --------------------------------------------------------
 
@@ -76,8 +109,8 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `local_id`, `user_id`, `service_id`, `reservation_time`, `created_at`) VALUES
-(9, 20, 15, 8, '2024-09-24 16:30:00', '2024-09-24 23:29:03'),
-(14, 24, 16, 10, '2024-09-25 02:32:00', '2024-09-25 01:29:02');
+(26, 72, 26, 18, '2024-10-16 16:30:00', '2024-10-10 16:43:40'),
+(28, 76, 26, 20, '2024-10-16 16:40:00', '2024-10-10 16:45:38');
 
 -- --------------------------------------------------------
 
@@ -103,9 +136,19 @@ CREATE TABLE `services` (
   `id` bigint(20) NOT NULL,
   `local_id` bigint(20) NOT NULL,
   `name` text NOT NULL,
-  `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `services`
+--
+
+INSERT INTO `services` (`id`, `local_id`, `name`, `price`) VALUES
+(18, 72, 'Uñas SemiPermanente', 30000.00),
+(19, 72, 'Decoloracion + color', 35000.00),
+(20, 76, 'Pelo + Barba', 15000.00),
+(21, 76, 'Barba', 13500.00),
+(22, 76, 'Pelo', 13500.00);
 
 -- --------------------------------------------------------
 
@@ -131,9 +174,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `surname`, `location`, `is_local_owner`, `phone_number`, `email`, `password`, `is_admin`) VALUES
 (1, 'ADMINISTRADOR', 'User', 'NULL', 0, NULL, 'admin1@gmail.com', '$2y$10$bYFe4Uwu3jC31ufmKcZSf.BdxV5/qGuRaVk5CpAYtwTQRua75U1uO', 1),
-(15, 'Lautaro', 'Lujan', 'Buenos Aires', 0, NULL, 'chinito@gmail.com', '$2y$10$XHG5nV3InmjJusYaJ16XaeZzjys4Op1QcUYTnwWutT.gMp75BStBW', 0),
-(16, 'Roman', 'Riquelme', 'Ituzaingo', 0, NULL, 'riquelme123@gmail.com', '$2y$10$tQC.N0Cr3/7KC9Z8tKiLJOgn.LURbnqSZG55EVlJK9PRP6.zno/fe', 0),
-(17, 'Nico', 'Cosmico', 'Ituzaingo', 0, NULL, 'nico123@gmail.com', '$2y$10$MSz3EKdC/jPTw3XAY9dYaur4r9H92z0ZuZ7lmbLFAUbYGwXlqkbFS', 0);
+(20, 'Cliente Rodriguez', 'Sato', 'Ituzaingo', 1, NULL, 'rodriguez@gmail.com', '$2y$10$T.86u/.vCQg/FD7XGW/oxOY.Q.H5Vcrkzkqt3Ks5sJTmpF9tkIQiK', 0),
+(21, 'Cliente Roman', 'Neto', 'La boca', 1, NULL, 'roman@gmail.com', '$2y$10$3DEecs47pVsDKg388qkiXO5YrTlq77sqPoDtogG/FjH4pNLYF2YT2', 0),
+(22, 'Cliente Federico', 'Ruiz', 'Merlo', 1, NULL, 'federico@gmail.com', '$2y$10$tgv7gEpCRNBv1iADyUp/pei/A2xYDwsgz3bCitTeEHKFL0QkpxoPS', 0),
+(23, 'Cliente Virginia', 'Quilmes', 'Moron', 1, NULL, 'virginia@gmail.com', '$2y$10$ARuEKj88ppVpTqgMfTsc.eFt1GJCMnVKARolqgr86wof987X0tMMi', 0),
+(24, 'Cliente Estefano', 'Blanco', 'Caballito', 1, NULL, 'estefano@gmail.com', '$2y$10$/cwwWjnMALwoYTotIvNZfudAWspi4FPvvh3oCeIYR1TLVgtfMkkga', 0),
+(25, 'Cliente Gimena', 'Banzas', 'Moreno', 0, NULL, 'Gimena@gmail.com', '$2y$10$x4J615fC50q1kD/xwOpeEOAaWXSGGrsVH3/265MeAqdi5u.vNBpW6', 0),
+(26, 'Cliente chinito', 'Lujan', 'Ituzaingo', 0, NULL, 'chinito@gmail.com', '$2y$10$9ARbudk.wzDeVdUEE/q2POy1DqSmbkcAtS9iz3oMnSM4Z2X4ALSUy', 0);
 
 --
 -- Índices para tablas volcadas
@@ -152,6 +199,13 @@ ALTER TABLE `locals`
 ALTER TABLE `local_images`
   ADD PRIMARY KEY (`id`),
   ADD KEY `local_id` (`local_id`);
+
+--
+-- Indices de la tabla `local_requests`
+--
+ALTER TABLE `local_requests`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `owner_id` (`owner_id`);
 
 --
 -- Indices de la tabla `reservations`
@@ -189,7 +243,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `locals`
 --
 ALTER TABLE `locals`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de la tabla `local_images`
@@ -198,28 +252,34 @@ ALTER TABLE `local_images`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `local_requests`
+--
+ALTER TABLE `local_requests`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
 -- AUTO_INCREMENT de la tabla `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restricciones para tablas volcadas
@@ -236,6 +296,12 @@ ALTER TABLE `locals`
 --
 ALTER TABLE `local_images`
   ADD CONSTRAINT `local_images_ibfk_1` FOREIGN KEY (`local_id`) REFERENCES `locals` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `local_requests`
+--
+ALTER TABLE `local_requests`
+  ADD CONSTRAINT `local_requests_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `reviews`

@@ -29,9 +29,25 @@ $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notificaciones de Reservas</title>
-    <link rel="stylesheet" href="../assets/css/notificaciones.css"> <!-- Enlazar el archivo CSS -->
+    <link rel="stylesheet" href="../assets/css/notificaciones.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../assets/img/logo.png" />
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="../assets/img/logo.png" alt="Logo" class="logo">
+            <h3>Find Your Style</h3>
+        </div>
+        <div class="navbar-right">
+            <a href="index.php">Volver a la pagina principal</a>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
     <div class="container">
         <h2>Notificaciones de Reservas</h2>
         <?php if (!empty($reservations)): ?>

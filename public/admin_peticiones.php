@@ -32,8 +32,8 @@ if (isset($_POST['approve'])) {
         $stmt_insert_local = $conn->prepare($query_insert_local);
         $stmt_insert_local->bindParam(':name', $request['name']);
         $stmt_insert_local->bindParam(':location', $request['location']);
-        $stmt_insert_local->bindParam(':opening_time', $request['opening_time']); // Cambiado de 'schedule' a 'opening_time'
-        $stmt_insert_local->bindParam(':closing_time', $request['closing_time']); // Añadido 'closing_time'
+        $stmt_insert_local->bindParam(':opening_time', $request['opening_time']);
+        $stmt_insert_local->bindParam(':closing_time', $request['closing_time']);
         $stmt_insert_local->bindParam(':owner_id', $request['owner_id']);
         $stmt_insert_local->bindParam(':main_photo', $request['main_photo']);
         $stmt_insert_local->execute();
@@ -49,10 +49,13 @@ if (isset($_POST['approve'])) {
         $stmt_update_user = $conn->prepare($query_update_user);
         $stmt_update_user->bindParam(':owner_id', $request['owner_id']);
         $stmt_update_user->execute();
-        header('Location: admin_peticiones.php');
-        echo("local aprobado con exito");
+
+        // Mostrar mensaje y pausar antes de redirigir
+        echo "<p>Local aprobado con éxito. Redirigiendo...</p>";
+        sleep(2); // Pausa de 2 segundos
+        header("Location: admin_peticiones.php");
         exit();
-    } 
+    }
 }
 
 // Rechazar una solicitud
@@ -65,9 +68,14 @@ if (isset($_POST['reject'])) {
     $stmt_update_request->bindParam(':request_id', $request_id);
     $stmt_update_request->execute();
 
-    echo "Solicitud rechazada.";
+    // Mostrar mensaje y pausar antes de redirigir
+    echo "<p>Solicitud rechazada. Redirigiendo...</p>";
+    sleep(2); // Pausa de 2 segundos
+    header("Location: admin_peticiones.php");
+    exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -76,6 +84,7 @@ if (isset($_POST['reject'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peticiones de Locales</title>
     <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png" />
 </head>
 <body>
     <header>

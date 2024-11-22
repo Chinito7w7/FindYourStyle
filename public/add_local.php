@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/add_local.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png" />
 </head>
 <body>
     <header>
@@ -68,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="page-name">Agregar Local</div>
         </div>
     </header>
+    
     <main>
         <div class="add-local-container">
             <form action="add_local.php" method="POST" enctype="multipart/form-data">

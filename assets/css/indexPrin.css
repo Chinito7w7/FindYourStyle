@@ -7,7 +7,9 @@
 body {
     background-color: #f5f5f5;
 }
-
+#title{
+   text-decoration: none; 
+}
 /* Navbar styles */
 .navbar {
     display: flex;
@@ -49,7 +51,7 @@ body {
 .view-local-button,
 .add-local-btn,
 .btn-notifications,
-.logout-button {
+.logout-button, .reservations-btn {
     background-color: #af6e19;
     color: white;
     padding: 5px 15px;
@@ -62,7 +64,7 @@ body {
 .view-local-button:hover,
 .add-local-btn:hover,
 .btn-notifications:hover,
-.logout-button:hover {
+.logout-button,.reservations-btn:hover {
     background-color: #8e570f;
 }
 
@@ -179,7 +181,7 @@ body {
     width: fit-content;
 }
 
-/* Responsive design */
+/* Responsive */
 @media (max-width: 1200px) {
     .local-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -216,3 +218,6 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
+

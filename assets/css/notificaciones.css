@@ -1,54 +1,123 @@
-/* Estilo general */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+*{ 
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+/* Navbar */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #af6e19;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    flex-wrap: wrap;
 }
 
-/* Contenedor principal */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    height: 60px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.navbar-right a {
+    background-color: #af6e19;
+    color: white;
+    margin-right: 10px;
+    padding: 5px 15px;
+    text-decoration: none;
     border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
-/* Título */
-h2 {
-    text-align: center;
-    color: #2c3e50;
+.navbar-right a:hover {
+    background-color: #8e570f;
 }
 
-/* Lista de reservas */
+
+.container {
+    margin-top: 100px;
+    margin-left: 40px;
+}
+/* Estilo para cada item de la lista de reservas */
 .reservation-list {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
 .reservation-item {
+
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-right: 30px;
+    margin-bottom: 15px;
     padding: 15px;
-    border-bottom: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.reservation-item:last-child {
-    border-bottom: none;
+.reservation-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Botón de eliminar */
+/* Estilo para los textos */
+.reservation-item strong {
+    font-size: 16px;
+    color: #af6e19;
+}
+
+.reservation-item span {
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
+}
+
+/* Botón para eliminar reserva */
 .delete-button {
-    background-color: #e74c3c; /* Rojo */
-    color: white;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 14px;
     border: none;
-    padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .delete-button:hover {
-    background-color: #c0392b; /* Rojo oscuro */
+    background-color: #c0392b;
+}
+
+/* Para dispositivos más pequeños */
+@media (max-width: 768px) {
+    .reservation-item {
+        padding: 10px;
+    }
+
+    .delete-button {
+        width: 100%;
+        text-align: center;
+    }
 }

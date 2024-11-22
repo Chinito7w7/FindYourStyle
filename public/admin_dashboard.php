@@ -13,6 +13,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración</title>
     <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png" />
 </head>
 <body>
     <header>

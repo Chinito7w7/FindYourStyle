@@ -7,12 +7,12 @@
 }
 
 body {
-    background: url('../img/backgroundForLocaladd.jpg') center center/cover no-repeat fixed;
+    background: url('../img/backgroundañadirlocal.png') center center/cover no-repeat fixed;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 120vh;
+    min-height: 100vh;
     
 }
 
@@ -51,12 +51,14 @@ main {
 }
 
 .add-local-container {
+    box-shadow: #333;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 400px;
+
 }
 .add-local-container form {
     display: flex;

@@ -95,6 +95,7 @@ if (isset($_GET['id'])) {
     <title>Configurar Local - Find Your Style</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/personalizar.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png" />
 </head>
 <body>
     <header>
@@ -119,10 +120,10 @@ if (isset($_GET['id'])) {
                 
                 <label for="local_image">Imagen del Local:</label>
                 <input type="file" id="local_image" name="local_image">
-                
+                <br>
                 <button type="submit" name="update">Actualizar Local</button>
             </form>
-
+            
             <h2>Agregar Servicios</h2>
             <form action="personalizar_local.php?id=<?php echo htmlspecialchars($local_id); ?>" method="POST">
                 <label for="name">Nombre del Servicio:</label>
@@ -130,7 +131,7 @@ if (isset($_GET['id'])) {
                 
                 <label for="price">Precio:</label>
                 <input type="number" id="price" name="price" step="0.01" required>
-                
+                <br>
                 <button type="submit" name="add_service">Agregar Servicio</button>
             </form>
 

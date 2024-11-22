@@ -61,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservar Turno</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/reservar_turno.css"> <!-- Archivo de estilos -->
+    <link rel="stylesheet" href="../assets/css/reservar_turno.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png" />
 </head>
 <body>
 
